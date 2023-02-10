@@ -1,0 +1,84 @@
+.bigButton {
+    grid-column: span 2;
+}
+
+button {
+    display: grid;
+    place-content: center;
+    font-size: 1.3rem;
+    padding: 0.5rem 1.2rem;
+    border: none;
+    outline: none;
+    border-radius: var(--border-radius);
+    font-weight: 700;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+.number_color_1 {
+    background-color: var(--color-theme_1-key-number-background);
+    color: var(--color-theme_1-text-number);
+    border-bottom: 3.5px solid var(--color-theme_1-key-number-shadow);
+}
+.number_color_1:hover {
+    background-color: var(--color-theme_1-key-number-background-hover);
+}
+
+.number_color_2 {
+    background-color: var(--color-theme_2-key-number-background);
+    color: var(--color-theme_2-text-number);
+    border-bottom: 3.5px solid var(--color-theme_2-key-number-shadow);
+}
+.number_color_2:hover {
+    background-color: var(--color-theme_2-key-number-background-hover);
+}
+
+.number_color_3 {
+    background-color: var(--color-theme_3-key-number-background);
+    color: var(--color-theme_3-text-number);
+    border-bottom: 3.5px solid var(--color-theme_3-key-number-shadow);
+}
+.number_color_3:hover {
+    background-color: var(--color-theme_3-key-number-background-hover);
+}
+
+/* diff colors  */
+
+.diffColor_1 {
+    background-color: var(--color-theme_1-key-functional-background);
+    border-bottom: 3.5px solid var(--color-theme_1-key-functional-shadow);
+}
+
+.diffColor_1:hover {
+    filter: brightness(150%);
+    color: white;
+}
+
+.diffColor_2 {
+    background-color: var(--color-theme_2-key-functional-background);
+    border-bottom: 3.5px solid var(--color-theme_2-key-functional-shadow);
+}
+
+.diffColor_2:hover {
+    background-color: var(--color-theme_2-key-functional-background-hover);
+    border-bottom: 3.5px solid var(--color-theme_2-key-functional-shadow-hover);
+    color: white;
+}
+
+.diffColor_3 {
+    background-color: var(--color-theme_3-key-functional-background);
+    border-bottom: 3.5px solid var(--color-theme_3-key-number-shadow);
+}
+
+.diffColor_3:hover {
+    background-color: var(--color-theme_3-key-functional-background-hover);
+    border-bottom: 3.5px solid var(--color-theme_3-key-functional-shadow-hover);
+    color: white;
+}
+
+.reset,
+.delete {
+    font-size: 25px;
+}
