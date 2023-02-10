@@ -1,0 +1,163 @@
+@import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;700&family=Nunito+Sans:wght@300;600;800&family=Roboto+Mono&display=swap');
+
+:root {
+    /* theme 1 */
+    --color-theme_1-main-background: hsl(222, 26%, 31%);
+    --color-theme_1-keypad-background: hsl(223, 31%, 20%);
+    --color-theme_1-screen-background: hsl(224, 36%, 15%);
+
+    --color-theme_1-key-functional-background: hsl(225, 21%, 49%);
+    --color-theme_1-key-functional-shadow: hsl(224, 28%, 35%);
+
+    --color-theme_1-key-functional-background-hover: hsl(6, 63%, 50%);
+    --color-theme_1-key-functional-shadow-hover: hsl(6, 70%, 34%);
+
+    --color-theme_1-key-number-background: hsl(45, 7%, 89%);
+    --color-theme_1-key-number-shadow: hsl(35, 11%, 61%);
+    --color-theme_1-key-number-background-hover: hsl(0, 0%, 100%);
+
+    --color-theme_1-text-number: hsl(60, 10%, 19%);
+    --color-theme_1-text-functional: hsl(0, 0%, 100%);
+
+
+    /* theme 2 */
+    --color-theme_2-main-background: hsl(0, 0%, 90%);
+    --color-theme_2-keypad-background: hsl(0, 5%, 81%);
+    --color-theme_2-screen-background: hsl(0, 0%, 93%);
+
+    --color-theme_2-key-functional-background: hsl(185, 42%, 37%);
+    --color-theme_2-key-functional-shadow: hsl(185, 58%, 25%);
+
+    --color-theme_2-key-functional-background-hover: hsl(25, 98%, 40%);
+    --color-theme_2-key-functional-shadow-hover: hsl(25, 99%, 27%);
+
+    --color-theme_2-key-number-background: hsl(30, 25%, 89%);
+    --color-theme_2-key-number-shadow: hsl(28, 16%, 65%);
+    --color-theme_2-key-number-background-hover: hsl(0, 0%, 100%);
+
+    --color-theme_2-text-number: hsl(221, 14%, 31%);
+    --color-theme_2-text-functional: hsl(0, 0%, 100%);
+
+    /* theme 3 */
+    --color-theme_3-main-background: hsl(268, 75%, 9%);
+    --color-theme_3-keypad-background: hsl(268, 71%, 12%);
+    --color-theme_3-screen-background: hsl(268, 71%, 12%);
+
+    --color-theme_3-key-number-background-hover: hsl(281, 89%, 26%);
+    --color-theme_3-key-number-shadow-hover: hsl(285, 91%, 52%);
+
+    --color-theme_3-key-functional-background-hover: hsl(176, 100%, 44%);
+    --color-theme_3-key-functional-shadow-hover: hsl(177, 92%, 70%);
+
+    --color-theme_3-key-number-background:  hsl(268, 47%, 21%);
+    --color-theme_3-key-number-shadow: hsl(290, 70%, 36%);
+
+    --color-theme_3-text-number: hsl(52, 100%, 62%);
+    --color-theme_3-text-functional: hsl(0, 0%, 100%);
+
+    --border-radius: 10px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-family: 'League Spartan';
+    font-size: 25px;
+}
+body {
+    background-color: var(--color-theme_1-main-background);
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    place-content: center;
+}
+
+
+.container {
+    width: 100%;
+    max-width: 500px;
+    display: grid;
+    grid-template-rows:  60px 100px 400px;
+    grid-template-columns: 0.25fr 0.25fr 0.25fr 0.25fr;
+    gap: 10px;
+}
+
+.header {
+    grid-column-start: 1;
+    grid-column-end: 5;
+    grid-row-start: 1;
+    grid-row-end: 2;
+}
+
+.display {
+    
+    grid-column-start: 1;
+    grid-column-end: 5;
+    grid-row-start: 2;
+    grid-row-end: 3;
+
+    background-color: var(--color-theme_1-screen-background);
+    border-radius: var(--border-radius);
+}
+
+.keypad {
+    background-color: var(--color-theme_1-keypad-background);
+    border-radius: var(--border-radius);
+
+    padding: 1rem;
+    grid-column-start: 1;
+    grid-column-end: 5;
+    grid-row-start: 3;
+    grid-row-end: 5;
+
+    display: grid;
+    grid-template-rows: repeat(5, 0.2fr);
+    grid-template-columns: repeat(4, 0.25fr);
+    gap: 15px;
+}
+
+.bigButton {
+    grid-column: span 2;
+}
+
+button {
+    display: grid;
+    place-content: center;
+    font-size: 1.3rem;
+    padding: 0.5rem 1.2rem;
+    border: none;
+    outline: none;
+    border-radius: var(--border-radius);
+    font-weight: 700;
+}
+
+button:hover{
+    cursor: pointer;
+}
+
+.number {
+    background-color: var(--color-theme_1-key-number-background);
+    border-bottom: 3.5px solid var(--color-theme_1-key-number-shadow);
+}
+
+.diffColor {
+    background-color: var(--color-theme_1-key-functional-background);
+    border-bottom: 3.5px solid var(--color-theme_1-key-functional-shadow);
+}
+
+.diffColor:hover{
+    background-color: var(--color-theme_1-key-functional-background-hover);
+}
+
+.number:hover{
+    background-color: var(--color-theme_1-key-number-background-hover);
+}
+
+.reset, .delete {
+    font-size: 25px;
+}
+
