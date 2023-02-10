@@ -46,19 +46,19 @@
     --color-theme_3-keypad-background: hsl(268, 71%, 12%);
     --color-theme_3-screen-background: hsl(268, 71%, 12%);
 
-    --color-theme_3-key-number-background-hover: hsl(281, 89%, 26%);
-    --color-theme_3-key-number-shadow-hover: hsl(285, 91%, 52%);
+    --color-theme_3-key-number-background: hsl(268, 47%, 21%);
+    --color-theme_3-key-number-shadow: hsl(285, 91%, 52%);
 
     --color-theme_3-key-functional-background-hover: hsl(176, 100%, 44%);
     --color-theme_3-key-functional-shadow-hover: hsl(177, 92%, 70%);
 
-    --color-theme_3-key-number-background: hsl(268, 47%, 21%);
-    --color-theme_3-key-number-shadow: hsl(290, 70%, 36%);
+    --color-theme_3-key-functional-background: hsl(290, 70%, 36%);
+    --color-theme_3-key-number-background-hover: hsl(290, 70%, 36%);
 
     --color-theme_3-text-number: hsl(52, 100%, 62%);
     --color-theme_3-text-functional: hsl(0, 0%, 100%);
 
-    --color-theme_2-text-display: hsl(52, 100%, 62%);
+    --color-theme_3-text-display: hsl(52, 100%, 62%);
 
     --border-radius: 10px;
 }
@@ -174,12 +174,13 @@ body {
     grid-row-end: 3;
 
     background-color: var(--color-theme_1-screen-background);
+    color: var(--color-theme_1-text-display);
     border-radius: var(--border-radius);
     display: flex;
     justify-content: flex-end;
     align-items: center;
     padding-right: 1rem;
-    color: var(--color-theme_1-text-display);
+
     font-size: 38px;
     font-weight: 700;
     letter-spacing: 1px;
@@ -199,47 +200,4 @@ body {
     grid-template-rows: repeat(5, 0.2fr);
     grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 15px;
-}
-
-.bigButton {
-    grid-column: span 2;
-}
-
-button {
-    display: grid;
-    place-content: center;
-    font-size: 1.3rem;
-    padding: 0.5rem 1.2rem;
-    border: none;
-    outline: none;
-    border-radius: var(--border-radius);
-    font-weight: 700;
-}
-
-button:hover {
-    cursor: pointer;
-}
-
-.number {
-    background-color: var(--color-theme_1-key-number-background);
-    border-bottom: 3.5px solid var(--color-theme_1-key-number-shadow);
-}
-
-.diffColor {
-    background-color: var(--color-theme_1-key-functional-background);
-    border-bottom: 3.5px solid var(--color-theme_1-key-functional-shadow);
-    color: var(--color-theme_1-text-functional);
-}
-
-.diffColor:hover {
-    background-color: var(--color-theme_1-key-functional-background-hover);
-}
-
-.number:hover {
-    background-color: var(--color-theme_1-key-number-background-hover);
-}
-
-.reset,
-.delete {
-    font-size: 25px;
 }
