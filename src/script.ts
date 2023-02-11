@@ -1,66 +1,110 @@
 interface ElementsObjectInterface {
-    theme: HTMLElement;
     body: HTMLBodyElement;
     header: HTMLElement;
     themeMenuSlider: HTMLElement;
     themeMenuPointer: HTMLElement;
     display: HTMLElement;
+    displayText: HTMLInputElement;
     keypad: HTMLElement;
     number: NodeListOf<HTMLElement>;
     diffColor: NodeListOf<HTMLElement>;
 }
 
 const initApp = () => {
-    const theme = document.querySelector('.themeMenu__pointer') as HTMLElement;
     const body = document.querySelector('body') as HTMLBodyElement;
     const header = document.querySelector('.header') as HTMLElement;
     const themeMenuSlider = document.querySelector('.themeMenu__slider') as HTMLElement;
     const themeMenuPointer = document.querySelector('.themeMenu__pointer') as HTMLElement;
     const display = document.querySelector('.display') as HTMLElement;
+    const displayText = document.querySelector('.currentValue') as HTMLInputElement;
     const keypad = document.querySelector('.keypad') as HTMLElement;
     const number = document.querySelectorAll('.number') as NodeListOf<HTMLElement>;
     const diffColor = document.querySelectorAll('.diffColor') as NodeListOf<HTMLElement>;
 
     const elementsObject: ElementsObjectInterface = {
-        theme,
         body,
         header,
         themeMenuSlider,
         themeMenuPointer,
         display,
+        displayText,
         keypad,
         number,
         diffColor,
     };
 
-    theme?.addEventListener('click', (event) => {
+    //Change theme style
+    themeMenuSlider?.addEventListener('click', (event) => {
         changeStyle(elementsObject);
+    });
+
+    //Calculator logic
+
+    //display
+    let newNumberFlag = false;
+    const currentValueElem = document.querySelector('.currentValue') as HTMLInputElement;
+    number.forEach((button) => {
+        button.addEventListener('click', (event) => {
+            const newInput = (event.target as HTMLElement).textContent as string;
+            if (newNumberFlag) {
+                currentValueElem.value = newInput;
+                newNumberFlag = false;
+            } else {
+                currentValueElem.value =
+                    currentValueElem.value === '0'
+                        ? newInput
+                        : checkForNeighboringOperators(currentValueElem, newInput)
+                        ? `${currentValueElem.value}`
+                        : removeWhiteSpaces(`${currentValueElem.value} ${newInput}`);
+            }
+        });
+    });
+
+    //equation
+    const equalButton = document.querySelector('.equal');
+    equalButton?.addEventListener('click', () => {
+        const currentValue = currentValueElem.value;
+        calculate(currentValue, currentValueElem);
+        console.log('hello');
+    });
+
+    // clear last char
+    const deleteButton = document.querySelector('.delete');
+    deleteButton?.addEventListener('click', () => {
+        currentValueElem.value = currentValueElem.value.slice(0, -1);
+    });
+
+    // clear display
+    const resetButton = document.querySelector('.reset');
+    resetButton?.addEventListener('click', () => {
+        currentValueElem.value = '';
     });
 };
 
 document.addEventListener('DOMContentLoaded', initApp);
 
 const changeStyle = ({
-    theme,
     body,
     header,
     themeMenuSlider,
     themeMenuPointer,
     display,
+    displayText,
     keypad,
     number,
     diffColor,
 }: ElementsObjectInterface) => {
-    switch (window.getComputedStyle(theme).left) {
+    switch (window.getComputedStyle(themeMenuPointer).left) {
         case '3px':
-            theme.style.left = '20px';
+            themeMenuPointer.style.left = '20px';
             body.style.backgroundColor = 'var(--color-theme_2-main-background)';
             keypad.style.backgroundColor = 'var(--color-theme_2-keypad-background)';
             header.style.color = 'var(--color-theme_2-text-display)';
             themeMenuSlider.style.backgroundColor = 'var(--color-theme_2-keypad-background)';
             themeMenuPointer.style.backgroundColor = 'var(--color-theme_2-key-functional-background)';
+            //display
             display.style.backgroundColor = 'var(--color-theme_2-screen-background)';
-            display.style.color = 'var(--color-theme_2-text-display)';
+            displayText.style.color = 'var(--color-theme_2-text-display)';
 
             number.forEach((button) => {
                 button.classList.add('number_color_2');
@@ -74,13 +118,15 @@ const changeStyle = ({
 
             break;
         case '20px':
-            theme.style.left = '40px';
+            themeMenuPointer.style.left = '37px';
             body.style.backgroundColor = 'var(--color-theme_3-main-background)';
             header.style.color = 'var(--color-theme_3-text-display)';
             themeMenuSlider.style.backgroundColor = 'var(--color-theme_3-keypad-background)';
             themeMenuPointer.style.backgroundColor = 'var(--color-theme_3-key-functional-background-hover)';
+            //display
             display.style.backgroundColor = 'var(--color-theme_3-screen-background)';
-            display.style.color = 'var(--color-theme_3-text-display)';
+            displayText.style.color = 'var(--color-theme_3-text-display)';
+
             keypad.style.backgroundColor = 'var(--color-theme_3-keypad-background)';
 
             number.forEach((button) => {
@@ -94,14 +140,16 @@ const changeStyle = ({
             });
 
             break;
-        case '40px':
-            theme.style.left = '3px';
+        case '37px':
+            themeMenuPointer.style.left = '3px';
             body.style.backgroundColor = 'var(--color-theme_1-main-background)';
             header.style.color = 'var(--color-theme_1-text-display)';
             themeMenuSlider.style.backgroundColor = 'var(--color-theme_1-keypad-background)';
             themeMenuPointer.style.backgroundColor = 'var(--color-theme_1-key-functional-background-hover)';
+            //display
             display.style.backgroundColor = 'var(--color-theme_1-screen-background)';
-            display.style.color = 'var(--color-theme_1-text-display)';
+            displayText.style.color = 'var(--color-theme_1-text-display)';
+
             keypad.style.backgroundColor = 'var(--color-theme_1-keypad-background)';
             number.forEach((button) => {
                 button.classList.add('number_color_1');
@@ -118,4 +166,35 @@ const changeStyle = ({
         default:
             break;
     }
+};
+
+const calculate = (equation: string, currentValueElem: HTMLInputElement) => {
+    const regex = /(^[x/=])|(\s)/g; //check for x/= on the beginning of the string | check for white space /g - check globaly
+    const checkForX = /x/g;
+    equation = equation.replace(regex, '');
+    const divByZero = /(\/0)/.test(equation);
+    if (divByZero) return (currentValueElem.value = '0');
+    equation = equation.replace(checkForX, '*');
+    console.log(equation);
+    return (currentValueElem.value = eval(equation));
+};
+
+const checkForNeighboringOperators = (equation: HTMLInputElement, newChar: string): boolean => {
+    const operatorSymbols = ['x', '/', '-', '+'];
+
+    const lastCharIsOperator = operatorSymbols.find((symbol) => symbol === equation.value[equation.value.length - 1]);
+    const newCharIsOperator = operatorSymbols.find((symbol) => symbol === newChar);
+    if (lastCharIsOperator === 'x' && newCharIsOperator === '-') {
+        return false;
+    } else if (Boolean(lastCharIsOperator) && Boolean(newCharIsOperator)) {
+        return true;
+    } else {
+        return false;
+    }
+};
+
+//I know it does not have sense, but I learn regex; :*
+const removeWhiteSpaces = (equation: string): string => {
+    const findWhiteSpaces = /\s/g;
+    return equation.replace(findWhiteSpaces, '');
 };

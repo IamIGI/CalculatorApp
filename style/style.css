@@ -153,18 +153,19 @@ body {
     position: relative;
 }
 
+.themeMenu__slider:hover {
+    cursor: pointer;
+}
+
 .themeMenu__pointer {
     border-radius: 50%;
     height: 13px;
     width: 13px;
     background-color: var(--color-theme_1-key-functional-background-hover);
+    transition: all 0.2s linear;
     position: absolute;
-    top: 2.5px;
+    top: 3px;
     left: 3px;
-}
-
-.themeMenu__pointer:hover {
-    cursor: pointer;
 }
 
 .display {
@@ -180,10 +181,20 @@ body {
     justify-content: flex-end;
     align-items: center;
     padding-right: 1rem;
+    padding-left: 1rem;
+}
 
+.currentValue {
     font-size: 38px;
+    padding-right: 20px;
+    letter-spacing: -1px;
     font-weight: 700;
-    letter-spacing: 1px;
+    background-color: transparent;
+    border: none;
+    width: 100%;
+    outline: none;
+    text-align: right;
+    color: var(--color-theme_1-text-display);
 }
 
 .keypad {
