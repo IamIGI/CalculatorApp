@@ -82,6 +82,7 @@ const initApp = () => {
 
 document.addEventListener('DOMContentLoaded', initApp);
 
+/** Change style basing of theme pointer position */
 const changeStyle = ({
     body,
     header,
@@ -101,7 +102,6 @@ const changeStyle = ({
             header.style.color = 'var(--color-theme_2-text-display)';
             themeMenuSlider.style.backgroundColor = 'var(--color-theme_2-keypad-background)';
             themeMenuPointer.style.backgroundColor = 'var(--color-theme_2-key-functional-background)';
-            //display
             display.style.backgroundColor = 'var(--color-theme_2-screen-background)';
             displayText.style.color = 'var(--color-theme_2-text-display)';
 
@@ -122,7 +122,6 @@ const changeStyle = ({
             header.style.color = 'var(--color-theme_3-text-display)';
             themeMenuSlider.style.backgroundColor = 'var(--color-theme_3-keypad-background)';
             themeMenuPointer.style.backgroundColor = 'var(--color-theme_3-key-functional-background-hover)';
-            //display
             display.style.backgroundColor = 'var(--color-theme_3-screen-background)';
             displayText.style.color = 'var(--color-theme_3-text-display)';
 
@@ -145,7 +144,6 @@ const changeStyle = ({
             header.style.color = 'var(--color-theme_1-text-display)';
             themeMenuSlider.style.backgroundColor = 'var(--color-theme_1-keypad-background)';
             themeMenuPointer.style.backgroundColor = 'var(--color-theme_1-key-functional-background-hover)';
-            //display
             display.style.backgroundColor = 'var(--color-theme_1-screen-background)';
             displayText.style.color = 'var(--color-theme_1-text-display)';
 
@@ -167,6 +165,7 @@ const changeStyle = ({
     }
 };
 
+/** Calculate equation. Set display value if equation is proper */
 const calculate = (equation: string, currentValueElem: HTMLInputElement) => {
     const regex = /(^[x/=])|(\s)/g; //check for x/= on the beginning of the string | check for white space /g - check globaly
     const checkForX = /x/g;
@@ -177,8 +176,9 @@ const calculate = (equation: string, currentValueElem: HTMLInputElement) => {
     return (currentValueElem.value = eval(equation));
 };
 
+/** Does not allow to add another operator if last char in equation is operator */
 const checkForNeighboringOperators = (equation: HTMLInputElement, newChar: string): boolean => {
-    const operatorSymbols = ['x', '/', '-', '+'];
+    const operatorSymbols = ['x', '/', '-', '+', '.'];
 
     const lastCharIsOperator = operatorSymbols.find((symbol) => symbol === equation.value[equation.value.length - 1]);
     const newCharIsOperator = operatorSymbols.find((symbol) => symbol === newChar);
@@ -192,6 +192,7 @@ const checkForNeighboringOperators = (equation: HTMLInputElement, newChar: strin
 };
 
 //I know it does not have sense, but I learn regex; :*
+/** remove white spaces in equation, so it's more readable */
 const removeWhiteSpaces = (equation: string): string => {
     const findWhiteSpaces = /\s/g;
     return equation.replace(findWhiteSpaces, '');
