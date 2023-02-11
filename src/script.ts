@@ -65,7 +65,6 @@ const initApp = () => {
     equalButton?.addEventListener('click', () => {
         const currentValue = currentValueElem.value;
         calculate(currentValue, currentValueElem);
-        console.log('hello');
     });
 
     // clear last char
@@ -175,7 +174,6 @@ const calculate = (equation: string, currentValueElem: HTMLInputElement) => {
     const divByZero = /(\/0)/.test(equation);
     if (divByZero) return (currentValueElem.value = '0');
     equation = equation.replace(checkForX, '*');
-    console.log(equation);
     return (currentValueElem.value = eval(equation));
 };
 

@@ -50,7 +50,6 @@ const initApp = () => {
     equalButton === null || equalButton === void 0 ? void 0 : equalButton.addEventListener('click', () => {
         const currentValue = currentValueElem.value;
         calculate(currentValue, currentValueElem);
-        console.log('hello');
     });
     // clear last char
     const deleteButton = document.querySelector('.delete');
@@ -135,7 +134,6 @@ const calculate = (equation, currentValueElem) => {
     if (divByZero)
         return (currentValueElem.value = '0');
     equation = equation.replace(checkForX, '*');
-    console.log(equation);
     return (currentValueElem.value = eval(equation));
 };
 const checkForNeighboringOperators = (equation, newChar) => {
